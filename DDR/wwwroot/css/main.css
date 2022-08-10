@@ -1,0 +1,90 @@
+body {
+
+    margin: 0;
+  }
+  
+  /*
+  ------------------------------------------
+  */
+  .btn {border: 1px solid black;padding: 0.5em 1em;background-color: white;border-radius: 1em;cursor: pointer;}
+  
+  .primary{
+  
+  background-color: black;
+  color: white;
+  font-weight: 900;
+  }
+  .tertiary{
+  
+  }
+  #blazor-error-ui .dismiss {
+    index: x;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+  /*
+  ------------------------------------------
+  */
+  
+  body > header {
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    background-color: black;
+    color: white;
+  }
+  
+  body > header .logo{display: flex;align-items: center;color: inherit;text-decoration: none;}
+  body > header .logo img{}
+  body > header .logo span{margin-left: 0.5em;font-weight: 900;}
+  
+  body > header .menu{border: 1px solid white;padding: 0.25em;display: flex;border-radius: 0.25em;}
+  body > header .menu.is-open{}
+  
+  video {
+  
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background-color:rgb(108, 247, 198);
+  z-index: -1;
+  }
+  
+  body > footer {
+  
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+  }
+  body > footer button {}
+  
+  
+  .popup{position: fixed;top: 0;bottom: 0;right: 0;left: 0;margin: auto;width: 90%;height: 9.5em;display: block;box-shadow: 0px 0px 0px 200vh #00000052, 0px 0px 20px 0px black;padding: 1em;box-sizing: border-box;background-color: white;border-radius: 0.25em;top: 3em;visibility: hidden;transition: all 0.5s;opacity: 0;z-index: 1;}
+  .popup div{margin-bottom: 1em;}
+  .popup div div{display: flex;justify-content: center;}
+  .popup div div button{margin: 0.5em;}
+.popup div span strong{
+  
+  display: block;
+  text-transform: uppercase;
+  font-weight: 900;
+  border: 1px solid black;
+  width: max-content;
+  margin: auto;
+  margin-top: 0.25em;
+  padding: 0.125em 0.25em;
+  border-radius: 0.25em;
+}
+  .popup div span{display: block;text-align: center;}
+  .popup.is-visible{visibility: visible;transform: translateY(-2em);opacity: 1;}
