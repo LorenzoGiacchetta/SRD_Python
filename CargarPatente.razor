@@ -1,0 +1,134 @@
+﻿@using System.Drawing
+@using System.Drawing.Imaging
+@using System.IO
+@using RestSharp
+@page "/"
+
+<div class="x">
+
+    <h3>Estacionamiento medido automatico</h3>
+    <h3>Cargar Patente</h3>
+</div>
+
+
+@if (Ocupado)
+{
+    <p>Procesando</p>
+
+}
+else if (!string.IsNullOrEmpty(Patente))
+{
+    <p>La patente es: @Patente</p>
+}
+
+@if (!string.IsNullOrEmpty(Base64Img))
+{
+    <div>
+        <img class="align-content-center" style="width:400px" src="data:image/jpg;base64,  @Base64Img" />
+    </div>
+}
+
+<p>@Error</p>
+
+
+<InputFile OnChange="@LoadFile" class="align-text-bottom" hidden="@Ocupado" />
+
+<br />
+@if (ImageArray is not null)
+{
+    <button class="" style="border-block-start-style" @onclick="SendFile" disabled="@Ocupado">Enviar</button>
+
+}
+
+@code {
+    bool Ocupado { get; set; }
+    string Patente { get; set; }
+    string Base64Img { get; set; }
+    string Error { get; set; }
+    byte[] ImageArray { get; set; }
+    //string response { get; set; }
+
+
+    private async void LoadFile(InputFileChangeEventArgs e)
+    {
+        //if (!e.File.Name.Contains(".jpeg") || !e.File.Name.Contains(".jpg") || !e.File.Name.Contains(".png"))
+        //{
+        //    Error = "Archivo no soportado";
+        //    return;
+        //}
+
+        Ocupado = true;
+
+        // Creamos un nuevo Stream con la foto que viene del InputFile
+        await using var ms = new MemoryStream();
+        await e.File.OpenReadStream(e.File.Size).CopyToAsync(ms);
+
+        // Usamos el Stream original y lo guardamos en un Image para poder cambiarle el tamaño,
+        // ya que el método ScaleImage requiere de un Image, no de un Stream
+        Image imagenOriginal = Image.FromStream(ms);
+        // Utilizamos el método ScaleImage para reducir el tamaño de la imágen original, con un alto de 400 pixeles
+        Image imagenNueva = ScaleImage(imagenOriginal, 400);
+        imagenNueva.Save("test.jpg");
+
+        // Creamos un nuevo Stream para guardar la nueva imagen y convertirla a un arreglo de bytes
+        await using var newFs = new MemoryStream();
+        imagenNueva.Save(newFs, ImageFormat.Jpeg);
+        ImageArray = newFs.ToArray();
+
+        // Esta conversión la hacemos para poder mostrar un "preview" de la imágen subida
+        Base64Img = Convert.ToBase64String(ImageArray);
+        Ocupado = false;
+        StateHasChanged();
+    }
+
+    private async void SendFile()
+    {
+        if (ImageArray is not null && !Ocupado)
+        {
+            Ocupado = true;
+            var client = new RestClient("http://127.0.0.1:5000");
+            var request = new RestRequest("/api/v1/patente")
+            .AddFile("patente", ImageArray, "patente.jpg");
+            var response = await client.PostAsync<string>(request);
+            Patente = response;
+            Ocupado = false;
+
+
+            StateHasChanged();
+        }
+    }
+    //PROBANDO IF RANDOM
+    //private async void RandomPago()
+    //{
+    //    string pagoS;
+    //    int r;
+    //        int p = 0;
+    //        Random pago = new Random();
+    //        if (Patente==response)
+    //        {
+    //            r = pago.Next();
+    //            if (r != p)
+    //            {
+    //                pagoS = Console.WriteLine("Patente paga.");
+    //            }
+    //            else
+    //            {
+    //                pagoS = Console.WriteLine("Debe pagar patente");
+    //            }
+    //        }
+    //}
+
+    private Image ScaleImage(Image image, int height)
+    {
+        double ratio = (double)height / image.Height;
+        int newWidth = (int)(image.Width * ratio);
+        int newHeight = (int)(image.Height * ratio);
+        Bitmap newImage = new Bitmap(newWidth, newHeight);
+        using (Graphics g = Graphics.FromImage(newImage))
+        {
+            g.DrawImage(image, 0, 0, newWidth, newHeight);
+        }
+        image.Dispose();
+        return newImage;
+    }
+}
