@@ -17,21 +17,27 @@
 
 }
 else if (!string.IsNullOrEmpty(Patente))
-{
-    <p>La patente es: @Patente</p>
+{   
+    <div class="patente">
+        <span>La patente es: </span>
+        <em>@Patente</em>
+    </div>
 }
 
 @if (!string.IsNullOrEmpty(Base64Img))
 {
-    <div>
+    <div class="img-patente">
         <img class="align-content-center" style="width:400px" src="data:image/jpg;base64,  @Base64Img" />
     </div>
 }
 
+
 <p>@Error</p>
 
-
-<InputFile OnChange="@LoadFile" class="align-text-bottom" hidden="@Ocupado" />
+<label class="cargar-patente" for="input-patente">
+    <span>Ingresar patente</span>
+</label>
+<InputFile OnChange="@LoadFile" class="align-text-bottom patente" id="input-patente" hidden="@Ocupado" />
 
 <br />
 @if (ImageArray is not null)
@@ -40,12 +46,15 @@ else if (!string.IsNullOrEmpty(Patente))
 
 }
 
+<p>@pagoS</p>
+
 @code {
     bool Ocupado { get; set; }
     string Patente { get; set; }
     string Base64Img { get; set; }
     string Error { get; set; }
     byte[] ImageArray { get; set; }
+    string pagoS{ get; set; }
 
     private async void LoadFile(InputFileChangeEventArgs e)
     {
@@ -79,7 +88,7 @@ else if (!string.IsNullOrEmpty(Patente))
         StateHasChanged();
     }
 
-    private async void SendFile()
+    public async void SendFile()
     {
         if (ImageArray is not null && !Ocupado)
         {
@@ -91,8 +100,33 @@ else if (!string.IsNullOrEmpty(Patente))
             Patente = response;
             Ocupado = false;
             StateHasChanged();
+
+            string RandomPago()
+            {
+
+                int random;
+                int pago = 0;
+                Random PagoG = new Random();
+
+                if (Patente == Patente)
+                {
+                    random = PagoG.Next();
+                    if (random != pago)
+                    {
+                        pagoS = "Patente paga.";
+                    }
+                    else
+                    {
+                        pagoS = "Debe pagar patente";
+                    }
+                }
+                return pagoS;
+            }
+
         }
     }
+
+
 
     private Image ScaleImage(Image image, int height)
     {
