@@ -6,8 +6,7 @@
 
 <div class="titulo pat">
 
-    <h3>Estacionamiento medido automatico</h3>
-    <h3>Cargar Patente</h3>
+    <h3><span>Estacionamiento medido automatico</span></h3>
 </div>
 
 
@@ -17,10 +16,22 @@
 
 }
 else if (!string.IsNullOrEmpty(Patente))
-{   
+{
     <div class="patente">
         <span>La patente es: </span>
         <em>@Patente</em>
+        @if (Patente != "ERROR")
+        {
+            if (Pago)
+            {
+                <p>Patente paga</p>
+            }
+            else
+
+            {
+                <p>Patente impaga</p>
+            }
+        }
     </div>
 }
 
@@ -34,9 +45,10 @@ else if (!string.IsNullOrEmpty(Patente))
 
 <p>@Error</p>
 
-<label class="cargar-patente" for="input-patente">
+<label class="cargar-patente" for="input-patente" hidden="@Ocupado">
     <span>Ingresar patente</span>
 </label>
+
 <InputFile OnChange="@LoadFile" class="align-text-bottom patente" id="input-patente" hidden="@Ocupado" />
 
 <br />
@@ -46,15 +58,14 @@ else if (!string.IsNullOrEmpty(Patente))
 
 }
 
-<p>@pagoS</p>
-
 @code {
     bool Ocupado { get; set; }
+    bool Pago { get; set; }
     string Patente { get; set; }
     string Base64Img { get; set; }
     string Error { get; set; }
     byte[] ImageArray { get; set; }
-    string pagoS{ get; set; }
+    Dictionary<string, bool> Pagos { get; set; } = new Dictionary<string, bool>();
 
     private async void LoadFile(InputFileChangeEventArgs e)
     {
@@ -98,35 +109,37 @@ else if (!string.IsNullOrEmpty(Patente))
             .AddFile("patente", ImageArray, "patente.jpg");
             var response = await client.PostAsync<string>(request);
             Patente = response;
+            RandomPago();
             Ocupado = false;
             StateHasChanged();
-
-            string RandomPago()
-            {
-
-                int random;
-                int pago = 0;
-                Random PagoG = new Random();
-
-                if (Patente == Patente)
-                {
-                    random = PagoG.Next();
-                    if (random != pago)
-                    {
-                        pagoS = "Patente paga.";
-                    }
-                    else
-                    {
-                        pagoS = "Debe pagar patente";
-                    }
-                }
-                return pagoS;
-            }
-
         }
     }
 
-
+    //PROBANDO IF RANDOM
+    private void RandomPago()
+    {
+        if (!string.IsNullOrEmpty(Patente) && Patente != "ERROR")
+        {
+            if(Pagos.ContainsKey(Patente) == false)
+            {
+                int random;
+                random = new Random().Next(0, 9);
+                if (random % 2 == 0)
+                {
+                    Pago = true;
+                }
+                else
+                {
+                    Pago = false;
+                }
+                Pagos.Add(Patente, Pago);
+            }
+            else
+            {
+                Pago = Pagos[Patente];
+            }
+        }
+    }
 
     private Image ScaleImage(Image image, int height)
     {

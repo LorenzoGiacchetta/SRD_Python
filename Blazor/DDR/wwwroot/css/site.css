@@ -3,14 +3,16 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     text-align: center;
-    background-color: #fafafa;
+    background-color: #e3d4f5;
 }
+
 .Camarita {
-    text-align:left;
+    text-align: left;
 }
 
 .titulo pat {
-    color: aqua
+    font-family: 'Oswald';
+    font-size: 22px;
 }
 
 .top-row.px-4.auth { /* RANCIADA A ARREGLAR */
@@ -19,12 +21,12 @@ html, body {
 
 .cargar-patente {
     cursor: pointer;
-    border: 3px solid #151d5d;
+    border: 2px solid #bf97df;
     border-radius: 0.5em;
     padding: 0.5em 1em;
     color: white;
-    background: rgb(2,0,36);
-    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 49%, rgba(0,212,255,1) 100%);
+    background: rgb(61,58,115);
+    background: linear-gradient(360deg, rgba(61,58,115,1) 0%, rgba(121,110,143,1) 30%, rgba(213,188,247,1) 100%);
 }
 
     .cargar-patente span {
@@ -43,6 +45,10 @@ input.patente {
 
     .patente span {
         display: block;
+        font-weight: 600;
+        margin-bottom: auto;
+        /* font-weight: 500; */
+        line-height: 0;
     }
 
     .patente em::before {
@@ -65,18 +71,27 @@ input.patente {
         margin-top: 0.5em;
         letter-spacing: 0.125em;
         font-family: 'Bebas Neue', cursive;
-        border: 2px solid gray;
+        border: 2px solid black;
         overflow: hidden;
+        background: white;
     }
 
 button {
-    border: 0;
+    cursor: pointer;
+    border: 2px solid #bf97df;
+    border-radius: 0.5em;
+    padding: 0.5em 1em;
+    color: white;
+    background: rgb(61,58,115);
+    background: linear-gradient(360deg, rgba(61,58,115,1) 0%, rgba(121,110,143,1) 47%, rgba(213,188,247,1) 100%);
+    /*border: 0;
     padding: 0.25em 1em;
     border-radius: 0.5em;
-    border: 1px solid red;
+    border: 3px solid #151d5d;
     background-color: blue;
     color: white;
     transition: all 0.5s;
+    background-image: linear-gradient(rgb(5, 39, 103) 0%, rgb(58, 6, 71) 70%);*/
 }
 
     button:hover {
@@ -85,7 +100,7 @@ button {
 
 .img-patente {
     width: 100%;
-    border: 4px solid blue;
+    border: 3px solid black;
     overflow: hidden;
     max-width: 400px;
     margin: auto;
