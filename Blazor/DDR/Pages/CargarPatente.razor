@@ -2,6 +2,7 @@
 @using System.Drawing.Imaging
 @using System.IO
 @using RestSharp
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
 @page "/"
 
 <div class="titulo pat">
@@ -109,9 +110,22 @@ else if (!string.IsNullOrEmpty(Patente))
             .AddFile("patente", ImageArray, "patente.jpg");
             var response = await client.PostAsync<string>(request);
             Patente = response;
-            RandomPago();
+            //RandomPago();
+            await ComprobarPago();
             Ocupado = false;
             StateHasChanged();
+        }
+    }
+    //CREAMOS UN METODO PARA LA BUSQUEDA DE LA PATENTE EN LA BASE DE DATOS
+    private async Task ComprobarPago()
+    {
+        using var context = DbFactory.CreateDbContext();
+        // BUSCA EN LA PRIMERA LINEA UNA SOLA PATENTE 
+        var patenteDb = await context.Patentes.SingleOrDefaultAsync(p => p.Caracteres == Patente);
+        // SI LA PATENTE ESTA PAGADA ENTONCES ES NULA, DEVUELVE EL ESTADO DE PAGO
+        if (patenteDb is not null)
+        {
+            Pago = patenteDb.Pagada;
         }
     }
 
@@ -120,7 +134,7 @@ else if (!string.IsNullOrEmpty(Patente))
     {
         if (!string.IsNullOrEmpty(Patente) && Patente != "ERROR")
         {
-            if(Pagos.ContainsKey(Patente) == false)
+            if (Pagos.ContainsKey(Patente) == false)
             {
                 int random;
                 random = new Random().Next(0, 9);
