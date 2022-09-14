@@ -23,15 +23,8 @@ else if (!string.IsNullOrEmpty(Patente))
         <input type="text" @bind="Patente" />
         @if (Patente != "ERROR")
         {
-            if (Pago)
-            {
-                <p>Patente paga</p>
-            }
-            else
-
-            {
-                <p>Patente impaga</p>
-            }
+            <p>tu patente esta @(Pago ? "paga" : "impaga")</p>
+            
         }
     </div>
 }
@@ -55,7 +48,7 @@ else if (!string.IsNullOrEmpty(Patente))
 <br />
 @if (ImageArray is not null)
 {
-    <button class="" style="border-block-start-style" @onclick="SendFile" disabled="@Ocupado">Enviar</button>
+    <button class="" @onclick="SendFile" disabled="@Ocupado">Enviar</button>
 
 }
 
@@ -66,6 +59,7 @@ else if (!string.IsNullOrEmpty(Patente))
     string Base64Img { get; set; }
     string Error { get; set; }
     byte[] ImageArray { get; set; }
+    
     Dictionary<string, bool> Pagos { get; set; } = new Dictionary<string, bool>();
 
     private async void LoadFile(InputFileChangeEventArgs e)
@@ -116,12 +110,13 @@ else if (!string.IsNullOrEmpty(Patente))
             StateHasChanged();
         }
     }
+
     //CREAMOS UN METODO PARA LA BUSQUEDA DE LA PATENTE EN LA BASE DE DATOS
     private async Task ComprobarPago()
     {
         using var context = DbFactory.CreateDbContext();
         // BUSCA EN LA PRIMERA LINEA UNA SOLA PATENTE
-        var patenteDb = await context.Patentes.SingleOrDefaultAsync(p => p.Caracteres == Patente);
+        var patenteDb = await context.Patentes.SingleOrDefaultAsync(p => p.Caracteres == Patente.TrimEnd());
         // SI LA PATENTE ESTA PAGADA ENTONCES ES NULA, DEVUELVE EL ESTADO DE PAGO
         if (patenteDb is not null)
         {
