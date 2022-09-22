@@ -51,17 +51,28 @@ input.patente {
         line-height: 0;
     }
 
-    .patente em::before {
-        content: "Republica Argentina";
-        display: block;
-        font-size: 0.5em;
-        background-color: blue;
-        width: 100%;
-        color: white;
-        padding: 0.25em 0.75em;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }
+.patente em::before {
+    content: "Republica Argentina";
+    display: block;
+    font-size: 0.5em;
+    background-color: blue;
+    width: 100%;
+    color: white;
+    padding: 0.25em 0.75em;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
+.inputEdit {
+    font-size: 0.9em;
+    width: 100%;
+    padding: 0.10em 0em;
+    letter-spacing: 0.125em;
+    box-sizing: border-box;
+    display: block;
+    font-style: inherit;
+    padding: 1px;
+    font-family: 'Bebas Neue', cursive;
+}
 /*.inputEdit {
     content: "Republica Argentina";
     display: block;

@@ -20,13 +20,17 @@ else if (!string.IsNullOrEmpty(Patente))
 <div class="patente">
     <span>La patente es: </span>
 
-    @if (!_isVisible)
+    @if (_isVisible)
     {
         <em>@Patente </em> <button class="btn btn-primary" @onclick="Editar">Editar</button>
+        if (!_isVisible)
+        {
+            <em><input class="inputEdit" type="text" style="text-align:center" @bind="Patente" /></em>
+        }
     }
     else
     {
-        <em><input class="inputEdit" type="text" @bind="Patente" /></em>
+
         @*<button class="btn btn-primary" @onclick="EnvioPat">Enviar</button>*@
     }
 
@@ -36,6 +40,7 @@ else if (!string.IsNullOrEmpty(Patente))
 
 
     }
+
 </div>
 }
 
@@ -75,16 +80,16 @@ else if (!string.IsNullOrEmpty(Patente))
 
     Dictionary<string, bool> Pagos { get; set; } = new Dictionary<string, bool>();
 
-    //public void EnvioPat() { 
+    //public void EnvioPat() {
     //TERMINAR
     //}
-
     public void Editar()
     {
 
         _isVisible = !_isVisible;
 
     }
+
 
     private async void LoadFile(InputFileChangeEventArgs e)
     {
@@ -144,7 +149,7 @@ else if (!string.IsNullOrEmpty(Patente))
             stringBorrar = Patente.Substring(0, 7).ToString();
 
         }
-        else if(Patente.Length == 10)
+        else if (Patente.Length == 10)
         {
             stringBorrar = Patente.Substring(0, 9).ToString();
         }
