@@ -17,16 +17,26 @@
 }
 else if (!string.IsNullOrEmpty(Patente))
 {
-    <div class="patente">
-        <span>La patente es: </span>
-        <em>@Patente</em>
-        <input type="text" @bind="Patente" />
-        @if (Patente != "ERROR")
-        {
-            <p>tu patente esta @(Pago ? "paga" : "impaga")</p>
-            
-        }
-    </div>
+<div class="patente">
+    <span>La patente es: </span>
+
+    @if (!_isVisible)
+    {
+        <em>@Patente </em> <button class="btn btn-primary" @onclick="Editar">Editar</button>
+    }
+    else
+    {
+        <em><input class="inputEdit" type="text" @bind="Patente" /></em>
+        @*<button class="btn btn-primary" @onclick="EnvioPat">Enviar</button>*@
+    }
+
+    @if (Patente != "ERROR")
+    {
+        <p>tu patente esta @(Pago ? "paga" : "impaga")</p>
+
+
+    }
+</div>
 }
 
 @if (!string.IsNullOrEmpty(Base64Img))
@@ -59,8 +69,22 @@ else if (!string.IsNullOrEmpty(Patente))
     string Base64Img { get; set; }
     string Error { get; set; }
     byte[] ImageArray { get; set; }
-    
+    private bool _isVisible = false;
+    string stringBorrar { get; set; }
+
+
     Dictionary<string, bool> Pagos { get; set; } = new Dictionary<string, bool>();
+
+    //public void EnvioPat() { 
+    //TERMINAR
+    //}
+
+    public void Editar()
+    {
+
+        _isVisible = !_isVisible;
+
+    }
 
     private async void LoadFile(InputFileChangeEventArgs e)
     {
@@ -114,9 +138,20 @@ else if (!string.IsNullOrEmpty(Patente))
     //CREAMOS UN METODO PARA LA BUSQUEDA DE LA PATENTE EN LA BASE DE DATOS
     private async Task ComprobarPago()
     {
+
+        if (Patente.Length == 8)
+        {
+            stringBorrar = Patente.Substring(0, 7).ToString();
+
+        }
+        else if(Patente.Length == 10)
+        {
+            stringBorrar = Patente.Substring(0, 9).ToString();
+        }
+
         using var context = DbFactory.CreateDbContext();
         // BUSCA EN LA PRIMERA LINEA UNA SOLA PATENTE
-        var patenteDb = await context.Patentes.SingleOrDefaultAsync(p => p.Caracteres == Patente.TrimEnd());
+        var patenteDb = await context.Patentes.SingleOrDefaultAsync(p => p.Caracteres == stringBorrar);
         // SI LA PATENTE ESTA PAGADA ENTONCES ES NULA, DEVUELVE EL ESTADO DE PAGO
         if (patenteDb is not null)
         {
