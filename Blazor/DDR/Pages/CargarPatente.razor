@@ -3,7 +3,7 @@
 @using System.IO
 @using RestSharp
 @inject IDbContextFactory<ApplicationDbContext> DbFactory
-@page "/"
+@page "/Principal"
 
 <div class="titulo pat">
 
@@ -20,26 +20,29 @@ else if (!string.IsNullOrEmpty(Patente))
 <div class="patente">
     <span>La patente es: </span>
 
-    @if (_isVisible)
+    @*<em>@Patente </em>
+    <p>¿La patente es correcta?</p>
+    <input type="button" name="name" value="" @onclick="UsuarioComprueba" />
+    <input type="button" name="name" value="" class="btn btn-primary" @onclick="UsuarioComprueba"/>
+    @if ()
     {
-        <em>@Patente </em> <button class="btn btn-primary" @onclick="Editar">Editar</button>
-        if (!_isVisible)
+        if (Patente != "ERROR")
         {
-            <em><input class="inputEdit" type="text" style="text-align:center" @bind="Patente" /></em>
+            <p>tu patente esta @(Pago ? "paga" : "impaga")</p>
+
+
         }
     }
-    else
+    @if (UsuarioComprueba())
     {
-
-        @*<button class="btn btn-primary" @onclick="EnvioPat">Enviar</button>*@
-    }
-
-    @if (Patente != "ERROR")
-    {
-        <p>tu patente esta @(Pago ? "paga" : "impaga")</p>
+        <em><input class="inputEdit" type="text" style="text-align:center" @bind="Patente" /></em>
+    }*@
 
 
-    }
+
+
+
+
 
 </div>
 }
@@ -74,21 +77,26 @@ else if (!string.IsNullOrEmpty(Patente))
     string Base64Img { get; set; }
     string Error { get; set; }
     byte[] ImageArray { get; set; }
-    private bool _isVisible = false;
+    bool UsuarioValidacion { get; set; }
+    bool Editable = true;
     string stringBorrar { get; set; }
 
 
     Dictionary<string, bool> Pagos { get; set; } = new Dictionary<string, bool>();
 
-    //public void EnvioPat() {
-    //TERMINAR
+  
+    //public void UsuarioComprueba()
+    //{
+
     //}
+
+
     public void Editar()
     {
 
-        _isVisible = !_isVisible;
-
+        Editable = !Editable;
     }
+
 
 
     private async void LoadFile(InputFileChangeEventArgs e)
