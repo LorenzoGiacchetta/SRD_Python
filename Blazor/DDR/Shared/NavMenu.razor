@@ -7,15 +7,29 @@
     </button>*@
 </div>
 
-@*<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="cargarpatente">
-                <span class="oi oi-camera-slr" aria-hidden="true"></span> Cargar patente
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        @*<div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> #NombrePagina
             </NavLink>
-        </li>
-    </ul>
-</div>*@
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="oi oi-plus" aria-hidden="true"></span> #NombrePagina
+            </NavLink>
+        </div>*@
+
+        <div class="nav-item px-3">
+            <NavLink style="bottom: 0;" class="nav-link" href="Contactos">
+                <iconify-icon icon="arcticons:exportcontacts"></iconify-icon>
+                <span class="iconify" aria-hidden="true"></span> Contactos
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
 
 @code {
     private bool collapseNavMenu = true;

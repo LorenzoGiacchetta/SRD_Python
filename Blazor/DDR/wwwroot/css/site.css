@@ -6,6 +6,212 @@ html, body {
     background-color: #e3d4f5;
 }
 
+:root {
+    --gmail: #000000;
+    --linkedin: #0077B5;
+    --instragram: #e4405f;
+}
+
+.alinear {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+}
+
+.AlinearPerfiles {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+}
+
+.perfilA {
+    display: flex;
+    height: 40vh;
+    align-items: center;
+}
+
+.perfilB {
+    display: flex;
+    height: 40vh;
+    align-items: center;
+}
+
+.perfilC {
+    display: flex;
+    height: 40vh;
+    align-items: center;
+}
+
+.perfilesUno {
+    height: 100px;
+    width: 110px;
+    border-radius: 50%;
+}
+
+.perfilesDos {
+    height: 100px;
+    width: 110px;
+    border-radius: 50%;
+}
+
+.perfilesTres {
+    height: 100px;
+    width: 110px;
+    border-radius: 50%;
+}
+
+
+
+/*1*/
+.redes-containerUno {
+    display: flex;
+    height: 30vh;
+    align-items: center;
+    justify-content: left;
+}
+
+    .redes-containerUno ul li {
+        display: inline-block;
+        margin: 0 5px;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+    }
+
+        .redes-containerUno ul li a {
+            display: block;
+            padding: 0 10px;
+            background: #333;
+            color: #fff;
+            line-height: 50px;
+            font-size: 18px;
+            box-shadow: 0 3px 5px 0px rgba(0, 0, 0, .2);
+            transition: .2s;
+        }
+
+    .redes-containerUno ul:hover a {
+        filter: blur(2px);
+    }
+
+    .redes-containerUno ul li a:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 5px 5px 0px rgba(0, 0, 0, .4);
+        filter: none;
+    }
+
+    .redes-containerUno ul li .gmailUno:hover {
+        background: var(--gmail);
+    }
+
+    .redes-containerUno ul li .linkedinUno:hover {
+        background: var(--linkedin);
+    }
+
+    .redes-containerUno ul li .instagramUno:hover {
+        background: var(--instragram);
+    }
+
+/*2*/
+.redes-containerDos {
+    display: flex;
+    height: 30vh;
+    align-items: center;
+    justify-content: center;
+}
+
+    .redes-containerDos ul li {
+        display: inline-block;
+        margin: 0 5px;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+    }
+
+        .redes-containerDos ul li a {
+            display: block;
+            padding: 0 10px;
+            background: #333;
+            color: #fff;
+            line-height: 50px;
+            font-size: 18px;
+            box-shadow: 0 3px 5px 0px rgba(0, 0, 0, .2);
+            transition: .2s;
+        }
+
+    .redes-containerDos ul:hover a {
+        filter: blur(2px);
+    }
+
+    .redes-containerDos ul li a:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 5px 5px 0px rgba(0, 0, 0, .4);
+        filter: none;
+    }
+
+    .redes-containerDos ul li .gmailDos:hover {
+        background: var(--gmail);
+    }
+
+    .redes-containerDos ul li .linkedinDos:hover {
+        background: var(--linkedin);
+    }
+
+    .redes-containerDos ul li .instagramDos:hover {
+        background: var(--instragram);
+    }
+
+/*3*/
+
+.redes-containerTres {
+    display: flex;
+    height: 30vh;
+    align-items: center;
+    justify-content: right;
+}
+
+    .redes-containerTres ul li {
+        display: inline-block;
+        margin: 0 5px;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+    }
+
+        .redes-containerTres ul li a {
+            display: block;
+            padding: 0 10px;
+            background: #333;
+            color: #fff;
+            line-height: 50px;
+            font-size: 18px;
+            box-shadow: 0 3px 5px 0px rgba(0, 0, 0, .2);
+            transition: .2s;
+        }
+
+    .redes-containerTres ul:hover a {
+        filter: blur(2px);
+    }
+
+    .redes-containerTres ul li a:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 5px 5px 0px rgba(0, 0, 0, .4);
+        filter: none;
+    }
+
+    .redes-containerTres ul li .gmailTres:hover {
+        background: var(--gmail);
+    }
+
+    .redes-containerTres ul li .linkedinTres:hover {
+        background: var(--linkedin);
+    }
+
+    .redes-containerTres ul li .instagramTres:hover {
+        background: var(--instragram);
+    }
+
+
+
 .Camarita {
     text-align: left;
 }
