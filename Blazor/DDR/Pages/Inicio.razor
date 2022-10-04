@@ -1,0 +1,8 @@
+﻿@page "/"
+    @inject IModalService modal
+
+<button @onclick="@(()=>modal.Show<Contactos>(""))"class="btn btn-primary">Iniciar sesion</button>   
+@code {
+
+}
+    

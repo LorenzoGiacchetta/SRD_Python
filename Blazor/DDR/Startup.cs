@@ -1,3 +1,4 @@
+using Blazored.Modal;
 using DDR.Areas.Identity;
 using DDR.Data;
 using Microsoft.AspNetCore.Builder;
@@ -47,6 +48,7 @@ namespace DDR
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddBlazoredModal();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
