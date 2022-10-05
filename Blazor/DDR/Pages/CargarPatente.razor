@@ -20,11 +20,11 @@ else if (!string.IsNullOrEmpty(Patente))
 <div class="patente">
     <span>La patente es: </span>
 
-    @*<em>@Patente </em>
+    <em>@Patente </em>
     <p>¿La patente es correcta?</p>
-    <input type="button" name="name" value="" @onclick="UsuarioComprueba" />
-    <input type="button" name="name" value="" class="btn btn-primary" @onclick="UsuarioComprueba"/>
-    @if ()
+    <input type="button" name="Si" value="" @onclick="UsuarioComprueba" />
+    <input type="button" name="No" value="" class="btn btn-primary" @onclick="Editar"/>
+    @if (UsuarioValidacion == true)
     {
         if (Patente != "ERROR")
         {
@@ -33,10 +33,10 @@ else if (!string.IsNullOrEmpty(Patente))
 
         }
     }
-    @if (UsuarioComprueba())
+    @if (Editable == true)
     {
         <em><input class="inputEdit" type="text" style="text-align:center" @bind="Patente" /></em>
-    }*@
+    }
 
 
 
@@ -78,22 +78,21 @@ else if (!string.IsNullOrEmpty(Patente))
     string Error { get; set; }
     byte[] ImageArray { get; set; }
     bool UsuarioValidacion { get; set; }
-    bool Editable = true;
+    bool Editable { get; set; }
     string stringBorrar { get; set; }
 
 
     Dictionary<string, bool> Pagos { get; set; } = new Dictionary<string, bool>();
 
-  
-    //public void UsuarioComprueba()
-    //{
 
-    //}
+    public void UsuarioComprueba()
+    {
+        UsuarioValidacion = !UsuarioValidacion;
+    }
 
 
     public void Editar()
     {
-
         Editable = !Editable;
     }
 
