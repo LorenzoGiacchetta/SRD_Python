@@ -1,8 +1,12 @@
 ﻿@page "/"
+
     @inject IModalService modal
+<body class="home-body" style="background-color: dimgray;">
+    <div class="container" style="height: 10cm; background-color: white; border: 2px solid #000000; border-radius: 10px; display: flex; align-items: center; justify-content: center;;">
+        <button @onclick="@(()=>modal.Show<Logueo>(""))" class="btn btn-primary" >Comenzar</button>
+    </div>
+</body>
 
-<button @onclick="@(()=>modal.Show<Logueo>(""))"class="btn btn-primary">Iniciar sesion</button>   
 @code {
-
-}
     
+}

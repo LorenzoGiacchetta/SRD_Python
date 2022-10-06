@@ -326,6 +326,10 @@ button {
         opacity: 0.8;
     }
 
+.navbar-toggler {
+    padding: 10px;
+}
+
 .img-patente {
     width: 100%;
     border: 3px solid black;
