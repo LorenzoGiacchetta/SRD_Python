@@ -20,9 +20,17 @@
 }
 else if (!string.IsNullOrEmpty(Patente))
 {
-<div class="patente">
-    <span>La patente es: </span>
+    <div class="patente">
+        <span>La patente es: </span>
 
+<<<<<<< HEAD
+        <em>@Patente </em>
+        <p>¿La patente es correcta?</p>
+        <input type="button" name="" value="" @onclick="UsuarioComprueba" /> Si 
+        <input type="button" name="" value="" class="btn btn-primary" @onclick="Editar" /> No
+
+        @if (UsuarioValidacion == true)
+=======
     <em>@Patente </em>
     <p>¿La patente es correcta?</p>
     <input type="button" name="Si" value=""  />
@@ -30,18 +38,25 @@ else if (!string.IsNullOrEmpty(Patente))
     @if (UsuarioValidacion == true)
     {
         if (Patente != "ERROR")
+>>>>>>> 18ab7f589e297692038aeb5e82a4dd99eb6bfed8
         {
-            <p>tu patente esta @(Pago ? "paga" : "impaga")</p>
-
-
+            if (Patente != "ERROR")
+            {
+                <p>tu patente esta @(Pago ? "paga" : "impaga")</p>
+            }
         }
-    }
-    @if (Editable == true)
-    {
-        <em><input class="inputEdit" type="text" style="text-align:center" @bind="Patente" /></em>
-    }
+        @if (Editable == true)
+        {
+            <em>
+                <input class="inputEdit" type="text" style="text-align:center" @bind="Patente"/>
+            </em>
 
-</div>
+            <p class="EnviarPatEditadaEm">
+                <input class="EnviarPatEditada" type="submit" @onclick="SendFile" />
+            </p>
+        }
+
+    </div>
 }
 
 @if (!string.IsNullOrEmpty(Base64Img))
@@ -64,7 +79,6 @@ else if (!string.IsNullOrEmpty(Patente))
 @if (ImageArray is not null)
 {
     <button class="" @onclick="SendFile" disabled="@Ocupado">Enviar</button>
-
 }
 </AuthorizeView>
 @code {
@@ -91,7 +105,13 @@ else if (!string.IsNullOrEmpty(Patente))
         Editable = !Editable;
     }
 
+    //public string EnviarPatEditada(string Patente)
+    //{
+    //    Patente;
 
+
+    //    return Patente;
+    //}
 
     private async void LoadFile(InputFileChangeEventArgs e)
     {
@@ -141,6 +161,13 @@ else if (!string.IsNullOrEmpty(Patente))
             StateHasChanged();
         }
     }
+
+    //public async void SendFileDos()
+    //{
+    //    string PatenteEditada = ?????? ;
+    //    Patente = PatenteEditada;
+
+    //}
 
     //CREAMOS UN METODO PARA LA BUSQUEDA DE LA PATENTE EN LA BASE DE DATOS
     private async Task ComprobarPago()
