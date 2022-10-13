@@ -1,10 +1,13 @@
 ﻿@using System.Drawing
 @using System.Drawing.Imaging
 @using System.IO
+@using Microsoft.AspNetCore.Mvc
 @using RestSharp
 @inject IDbContextFactory<ApplicationDbContext> DbFactory
 @page "/Principal"
 
+<AuthorizeView Roles="Admin">
+   
 <div class="titulo pat">
 
     <h3><span>Estacionamiento medido automatico</span></h3>
@@ -22,7 +25,7 @@ else if (!string.IsNullOrEmpty(Patente))
 
     <em>@Patente </em>
     <p>¿La patente es correcta?</p>
-    <input type="button" name="Si" value="" @onclick="UsuarioComprueba" />
+    <input type="button" name="Si" value=""  />
     <input type="button" name="No" value="" class="btn btn-primary" @onclick="Editar"/>
     @if (UsuarioValidacion == true)
     {
@@ -63,7 +66,7 @@ else if (!string.IsNullOrEmpty(Patente))
     <button class="" @onclick="SendFile" disabled="@Ocupado">Enviar</button>
 
 }
-
+</AuthorizeView>
 @code {
     bool Ocupado { get; set; }
     bool Pago { get; set; }
@@ -75,15 +78,13 @@ else if (!string.IsNullOrEmpty(Patente))
     bool Editable { get; set; }
     string stringBorrar { get; set; }
 
-
-    Dictionary<string, bool> Pagos { get; set; } = new Dictionary<string, bool>();
-
-
-    public void UsuarioComprueba()
+    
+    [Authorize(Roles = "Admin")]
+    public class AdministrationController : Controller
     {
-        UsuarioValidacion = !UsuarioValidacion;
+        public IActionResult Index() =>
+            Content("Admin");
     }
-
 
     public void Editar()
     {
@@ -166,30 +167,30 @@ else if (!string.IsNullOrEmpty(Patente))
     }
 
     //PROBANDO IF RANDOM
-    private void RandomPago()
-    {
-        if (!string.IsNullOrEmpty(Patente) && Patente != "ERROR")
-        {
-            if (Pagos.ContainsKey(Patente) == false)
-            {
-                int random;
-                random = new Random().Next(0, 9);
-                if (random % 2 == 0)
-                {
-                    Pago = true;
-                }
-                else
-                {
-                    Pago = false;
-                }
-                Pagos.Add(Patente, Pago);
-            }
-            else
-            {
-                Pago = Pagos[Patente];
-            }
-        }
-    }
+    //private void RandomPago()
+    //{
+    //    if (!string.IsNullOrEmpty(Patente) && Patente != "ERROR")
+    //    {
+    //        if (Pagos.ContainsKey(Patente) == false)
+    //        {
+    //            int random;
+    //            random = new Random().Next(0, 9);
+    //            if (random % 2 == 0)
+    //            {
+    //                Pago = true;
+    //            }
+    //            else
+    //            {
+    //                Pago = false;
+    //            }
+    //            Pagos.Add(Patente, Pago);
+    //        }
+    //        else
+    //        {
+    //            Pago = Pagos[Patente];
+    //        }
+    //    }
+    //}
 
     private Image ScaleImage(Image image, int height)
     {
