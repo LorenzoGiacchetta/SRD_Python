@@ -19,45 +19,52 @@
     }
     else if (!string.IsNullOrEmpty(Patente))
     {
-<div class="patente">
-    <span>
-        La patente es:
-    </span>
-    <em>
-        @Patente
-    </em>
-    <p>
-        ¿La patente es correcta?
-    </p>
+        <div class="patente">
+            <span>
+                La patente es: 
+            </span>
+            <em>
+                @Patente
+            </em>
+            <p>
+                ¿La patente es correcta?
+            </p>
+            <input type="button" name="" value=""/> Si 
+            <input type="button" name="" value="" class="btn btn-primary" @onclick="Editar" /> No
 
-    <input type="button" name="Si" value="" class="btn btn-primary" @onclick="UsuarioComprueba" /> Si
+            @if (UsuarioValidacion == true)
+            { 
+                <em>
+                    @Patente 
+                </em>
+                <p>
+                    ¿La patente es correcta?
+                </p>
+                <input type="button" name="Si" value=""  />
+                <input type="button" name="No" value="" class="btn btn-primary" @onclick="Editar"/>
+            }
+            @if (UsuarioValidacion == true)
+             {
+                    if (Patente != "ERROR")
+                    {
+                        if (Patente != "ERROR")
+                        {
+                            <p>tu patente esta @(Pago ? "paga" : "impaga")</p>
+                        }
+                    }
+                    @if (Editable == true)
+                    {
+                        <em>
+                            <input class="inputEdit" type="text" style="text-align:center" @bind="Patente"/>
+                        </em>
 
-    <input type="button" name="No" value="" class="btn btn-primary" @onclick="Editar" />
+                        <p class="EnviarPatEditadaEm">
+                            <input class="EnviarPatEditada" type="submit" @onclick="SendFile"/>
+                        </p>
+                    }
+             }
 
-
-    @if (UsuarioValidacion == true)
-    {
-        if (Patente != "ERROR")
-        {
-
-            <p>tu patente esta @(Pago ? "paga" : "impaga")</p>
-            
-        }
-
-    }
-    @if (Editable == true)
-    {
-        <em>
-            <input class="inputEdit" type="text" style="text-align:center" @bind="Patente" />
-        </em>
-
-        <p class="EnviarPatEditadaEm">
-            <input class="EnviarPatEditada" type="submit" for="sumbit-patente" />
-            <InputText @onclick="" class="align-text-bottom" id="sumbit-patente"/>
-        </p>
-    }
-
-</div>
+        </div>
     }
 
     @if (!string.IsNullOrEmpty(Base64Img))
@@ -87,7 +94,6 @@
     bool Ocupado { get; set; }
     bool Pago { get; set; }
     string Patente { get; set; }
-    string PatenteEditada { get; set; }
     string Base64Img { get; set; }
     string Error { get; set; }
     byte[] ImageArray { get; set; }
@@ -95,7 +101,7 @@
     bool Editable { get; set; }
     string stringBorrar { get; set; }
 
-
+    //autorizacion para administrador y Usuario
     [Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
@@ -103,21 +109,18 @@
             Content("Admin");
     }
 
-    public void UsuarioComprueba()
-    {
-        UsuarioValidacion = !UsuarioValidacion;
-    }
-
     public void Editar()
     {
         Editable = !Editable;
     }
 
-    public void SendFileDos()
-    {
-        Patente = PatenteEditada;
-        
-    }
+    //public string EnviarPatEditada(string Patente)
+    //{
+    //    Patente;
+
+
+    //    return Patente;
+    //}
 
     private async void LoadFile(InputFileChangeEventArgs e)
     {
