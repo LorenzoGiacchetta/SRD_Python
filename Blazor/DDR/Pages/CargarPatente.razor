@@ -8,78 +8,87 @@
 
 <AuthorizeView Roles="Admin">
    
-<div class="titulo pat">
+    <div class="titulo pat">
 
-    <h3><span>Estacionamiento medido automatico</span></h3>
-</div>
+        <h3><span>Estacionamiento medido automatico</span></h3>
+    </div>
 
-
-@if (Ocupado)
-{
-    <p>Procesando</p>
-}
-else if (!string.IsNullOrEmpty(Patente))
-{
-    <div class="patente">
-        <span>La patente es: </span>
-
-<<<<<<< HEAD
-        <em>@Patente </em>
-        <p>¿La patente es correcta?</p>
-        <input type="button" name="" value="" @onclick="UsuarioComprueba" /> Si 
-        <input type="button" name="" value="" class="btn btn-primary" @onclick="Editar" /> No
-
-        @if (UsuarioValidacion == true)
-=======
-    <em>@Patente </em>
-    <p>¿La patente es correcta?</p>
-    <input type="button" name="Si" value=""  />
-    <input type="button" name="No" value="" class="btn btn-primary" @onclick="Editar"/>
-    @if (UsuarioValidacion == true)
+    @if (Ocupado)
     {
-        if (Patente != "ERROR")
->>>>>>> 18ab7f589e297692038aeb5e82a4dd99eb6bfed8
-        {
-            if (Patente != "ERROR")
-            {
-                <p>tu patente esta @(Pago ? "paga" : "impaga")</p>
-            }
-        }
-        @if (Editable == true)
-        {
+        <p>Procesando</p>
+    }
+    else if (!string.IsNullOrEmpty(Patente))
+    {
+        <div class="patente">
+            <span>
+                La patente es: 
+            </span>
             <em>
-                <input class="inputEdit" type="text" style="text-align:center" @bind="Patente"/>
+                @Patente
             </em>
-
-            <p class="EnviarPatEditadaEm">
-                <input class="EnviarPatEditada" type="submit" @onclick="SendFile" />
+            <p>
+                ¿La patente es correcta?
             </p>
-        }
+            <input type="button" name="" value=""/> Si 
+            <input type="button" name="" value="" class="btn btn-primary" @onclick="Editar" /> No
 
-    </div>
-}
+            @if (UsuarioValidacion == true)
+            { 
+                <em>
+                    @Patente 
+                </em>
+                <p>
+                    ¿La patente es correcta?
+                </p>
+                <input type="button" name="Si" value=""  />
+                <input type="button" name="No" value="" class="btn btn-primary" @onclick="Editar"/>
+            }
+            @if (UsuarioValidacion == true)
+             {
+                    if (Patente != "ERROR")
+                    {
+                        if (Patente != "ERROR")
+                        {
+                            <p>tu patente esta @(Pago ? "paga" : "impaga")</p>
+                        }
+                    }
+                    @if (Editable == true)
+                    {
+                        <em>
+                            <input class="inputEdit" type="text" style="text-align:center" @bind="Patente"/>
+                        </em>
 
-@if (!string.IsNullOrEmpty(Base64Img))
-{
-    <div class="img-patente">
-        <img class="align-content-center" style="width:400px" src="data:image/jpg;base64,  @Base64Img" />
-    </div>
-}
+                        <p class="EnviarPatEditadaEm">
+                            <input class="EnviarPatEditada" type="submit" @onclick="SendFile"/>
+                        </p>
+                    }
+             }
 
+        </div>
+    }
 
-<p>@Error</p>
+    @if (!string.IsNullOrEmpty(Base64Img))
+    {
+        <div class="img-patente">
+            <img class="align-content-center" style="width:400px" src="data:image/jpg;base64,  @Base64Img" />
+        </div>
+    }
 
-<label class="cargar-patente" for="input-patente" hidden="@Ocupado">
-    <span>Ingresar patente</span>
-</label>
+    <p>@Error</p>
 
-<InputFile OnChange="@LoadFile" class="align-text-bottom patente" id="input-patente" hidden="@Ocupado" />
+    <label class="cargar-patente" for="input-patente" hidden="@Ocupado">
+        <span>
+            Ingresar patente
+        </span>
+    </label>
 
-<br />
-@if (ImageArray is not null)
-{
-    <button class="" @onclick="SendFile" disabled="@Ocupado">Enviar</button>
-}
+    <InputFile OnChange="@LoadFile" class="align-text-bottom patente" id="input-patente" hidden="@Ocupado"/>
+
+    <br/>
+    @if (ImageArray is not null)
+    {
+        <button class="" @onclick="SendFile" disabled="@Ocupado">Enviar</button>
+    }
 </AuthorizeView>
 @code {
     bool Ocupado { get; set; }
