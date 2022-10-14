@@ -101,7 +101,7 @@
     bool Editable { get; set; }
     string stringBorrar { get; set; }
 
-    //autorizacion para administrador y Usuario
+    
     [Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
