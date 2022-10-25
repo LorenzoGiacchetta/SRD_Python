@@ -1,4 +1,4 @@
-﻿@page "/Registerr"
+﻿@page "/Registro"
 
 
 <html>
@@ -24,7 +24,7 @@
     </head>
 
     <body class="loginbody">
-        <header >
+        <header>
 
                 <nav class="navbar navbar-expand-sm navbar-light navbar-toggleable-sm bg-white border-bottom box-shadow mb-3">
                     <div class="container">
@@ -32,14 +32,14 @@
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" >
+                        @*<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" >
 
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" href="/Identity/Account/Register?returnUrl=%2F">Register</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div>*@
                     </div>
                 </nav>
         </header>
@@ -47,12 +47,12 @@
         <div class="InicioSesion">
 
             <section class="content px-4" style="background: #e3d4f5;">
-                <form id="registerForm" method="post" action="/Identity/Account/Register" novalidate="novalidate">
+                <form id="registerForm" method="post" action="/" novalidate="novalidate">
                     <div class="header">
         
-                        <h3 style="text-align: center;">Inicio de sesion</h3>
+                        <h3 style="text-align: center;">Registro</h3>
             
-                        <p>Inicia sesion para ingresar a la aplicacion.</p>
+                        <p>Completa el formulario para poder registrarte e iniciar sesion.</p>
             
                     </div>
         
@@ -75,14 +75,14 @@
                                     <input class="form-control" autocomplete="new-password" type="password" data-val="true" data-val-equalto="The password and confirmation password do not match." data-val-equalto-other="*.Password" id="Input_ConfirmPassword" name="Input.ConfirmPassword">
                                     <span class="text-danger field-validation-valid" data-valmsg-for="Input.ConfirmPassword" data-valmsg-replace="true"></span>
                         </div>
-                        <button id="registerSubmit" type="submit" class="btn btn-primary" href="/">Register</button>
+                        <button id="registerSubmit" type="submit" class="btn btn-primary">Register</button>
                         <input name="__RequestVerificationToken" type="hidden" value="CfDJ8PxDd7vM0b9PvU6W0Z4aTJ7sD28F2Utg29p9JlXICevpvOzuiY4BWZJcotBANsHcni4_nQtJchQcjOlmD4jQ5eXSGbDBueXx1BmrDnumgE7mP-4Vk5l8XH9JxxAAxb63uU9J2phhjjT_0b2R36HazHI">
-                            
-                        @*<a id="submit" href="#">SIGN UP FOR INVITE NOW</a>*@
+                        
                     </div>
                 </form>
             </section>     
         </div>
+
     </body>
 </html>
 
