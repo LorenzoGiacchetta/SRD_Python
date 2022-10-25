@@ -2,9 +2,9 @@
     <a class="navbar-brand" href="Principal">E.M.A <span class="oi oi-camera-slr" id="Camarita" aria-hidden="true"></span></a>
     
     
-    <button @onclick="ToggleNavMenu">
-        <span>ocultar</span>
-    </button>
+    @*<button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>*@
 </div>
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
@@ -32,7 +32,7 @@
 
 
 @code {
-    private bool collapseNavMenu = false;
+    private bool collapseNavMenu = true;
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
