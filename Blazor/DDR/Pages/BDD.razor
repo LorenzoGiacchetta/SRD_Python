@@ -1,0 +1,55 @@
+﻿@using DDR.Models
+@page "/BaseDatos"
+@using Microsoft.AspNetCore.Mvc
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+
+<h3>BDD</h3>
+<h2>Cargar una nueva patente en la base de datos </h2>
+<EditForm Model="@modelpat">
+    <table class="table">
+        <tr>
+            <td>caracteres:</td>
+            <td><input type="text" @bind="cargarPat"></input></td>
+
+        </tr>
+
+        <button type="submit" class="btn btn-primary" @onclick="CargarNewPatente">cargar</button>
+    </table>
+
+
+</EditForm>
+
+
+
+
+
+@code {
+    string NewPatente { get; set; }
+    string cargarPat { get; set; }
+    [Authorize(Roles = "Admin")]
+    public class AdministrationController : Controller
+    {
+        public IActionResult Index() =>
+            Content("Admin");
+    }
+    public Patente modelpat = new Patente();
+
+    private async Task CargarNewPatente()
+    {
+
+
+        using var context = DbFactory.CreateDbContext();
+
+        var PatenteNew = new Patente
+            {
+                Caracteres = cargarPat
+            };
+        context.Patentes.Add(PatenteNew);
+        context.SaveChanges();
+
+    }
+
+
+
+}
+
