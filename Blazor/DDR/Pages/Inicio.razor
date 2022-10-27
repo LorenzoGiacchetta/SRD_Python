@@ -1,5 +1,5 @@
 ﻿@page "/"
-    @inject IModalService modal
+@inject IModalService modal
 
 @*<button @onclick="@(()=>modal.Show<NuevoLogin>(""))"class="btn btn-primary">Iniciar sesion</button>   *@
 
@@ -85,18 +85,7 @@
                             </div>
                             <input name="__RequestVerificationToken" type="hidden" value="CfDJ8PxDd7vM0b9PvU6W0Z4aTJ42ZhTx6ZINM4ec1j2wSfVJWDnJE9yazXaneZ65bqGXAL-PUcvMUNzO6oTlw5_RyWDV70dYuHWv3ovZuaQFPcSyLvfGfWLN8li6x9CBBZ_eAeqVOtmhFTh8OdfwFw-r9Zc">
                             <input name="Input.RememberMe" type="hidden" value="false">
-                            @*<div class="form-group">
-                                <p>
-                                     <a id="forgot-password" href="/Identity/Account/ForgotPassword">Forgot your password?</a>
-                                </p>
-                                <p>
-                                     <a href="/Identity/Account/Register?returnUrl=%2F">Register as a new user</a>
-                                </p>
-                                <p>
-                                     <a id="resend-confirmation" href="/Identity/Account/ResendEmailConfirmation">Resend email confirmation</a>
-                                </p>
-                            </div>
-                            <a id="submit" href="#">SIGN UP FOR INVITE NOW</a>*@
+                           
                     </div>
                 </form>
             </section>     

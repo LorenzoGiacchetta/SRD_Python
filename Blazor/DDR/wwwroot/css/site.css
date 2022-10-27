@@ -6,6 +6,10 @@ html, body {
     background-color: #e3d4f5;
 }
 
+.navbar navbar-expand-sm navbar-light navbar-toggleable-sm bg-white border-bottom box-shadow mb-3{
+    display: none;
+}
+
 :root {
     --gmail: #c80f0f;
     --linkedin: #0077B5;
