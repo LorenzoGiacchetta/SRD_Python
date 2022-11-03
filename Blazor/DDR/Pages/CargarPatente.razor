@@ -34,7 +34,7 @@
             <input type="button" name="" value="" class="btn btn-primary" @onclick="Editar" /> No           
 
            
-            if(Editable == true)
+            @if(Editable == true)
             {
                 <em>
                     <input class="inputEdit" type="text" style="text-align:center" @bind="Patente" />
@@ -46,7 +46,7 @@
             }
             else if(Patente != "ERROR")
             {
-                if (SiPago == True)
+                if (SiPago == true)
                 {
                     <p>tu patente esta @(Pago ? "paga" : "impaga")</p>
                 }
