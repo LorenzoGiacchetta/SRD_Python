@@ -30,7 +30,7 @@
             <p>
                 ¿La patente es correcta?
             </p>
-            <input type="button" name="" value="" @onclick="ComprobarPago"/> Si 
+            <input type="button" name="" value="" @onclick="SiPagoMetodo"/> Si 
             <input type="button" name="" value="" class="btn btn-primary" @onclick="Editar" /> No           
 
            
@@ -41,8 +41,15 @@
                 </em>
 
                 <p class="EnviarPatEditadaEm">
-                    <input class="EnviarPatEditada" type="submit" @onclick="SendFile" />
+                    <input class="EnviarPatEditada" type="submit" @onclick="SiPagoMetodo" />
                 </p>
+            }
+            else if(Patente != "ERROR")
+            {
+                if (SiPago == True)
+                {
+                    <p>tu patente esta @(Pago ? "paga" : "impaga")</p>
+                }
             }
              
         </div>
@@ -81,8 +88,9 @@
     bool UsuarioValidacion { get; set; }
     bool Editable { get; set; }
     string stringBorrar { get; set; }
+    bool SiPago { get; set; }
 
-    
+
     [Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
@@ -93,6 +101,10 @@
     public void Editar()
     {
         Editable = !Editable;
+    }
+    public void SiPagoMetodo() 
+    {
+        SiPago = !SiPago;
     }
 
     //public string EnviarPatEditada(string Patente)
