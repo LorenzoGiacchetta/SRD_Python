@@ -3,7 +3,7 @@
 @using Microsoft.AspNetCore.Mvc
 @inject IDbContextFactory<ApplicationDbContext> DbFactory
 @*<AuthorizeView Roles="Admin" Context="entity">*@
-    <table class="table">
+    @*<table class="table">
         <thead>
             <tr>
                 <th>Date</th>
@@ -21,7 +21,7 @@
             }
         </tbody>
     </table>
-
+*@
 <h3>BDD</h3>
 <h2>Cargar una nueva patente en la base de datos </h2>
 <EditForm Model="@modelpat">
