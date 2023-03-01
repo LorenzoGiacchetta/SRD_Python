@@ -272,6 +272,16 @@ input.patente {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+
+.inputSiNo {
+    display: flex;
+    justify-content: space-between;
+}
+.SiNo {
+    height: 2em;
+    width: 5em;
+}
+
 .inputEdit {
     font-size: 0.9em;
     width: 100%;

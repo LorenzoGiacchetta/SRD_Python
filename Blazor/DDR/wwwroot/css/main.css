@@ -5,7 +5,7 @@ body {
   /*
   ------------------------------------------
   */
-  .btn {
+  /*.btn {
       border: 1px solid black;
       padding: 0.5em 1em;
       background-color: white;
@@ -15,7 +15,7 @@ body {
   .primary{
     background-color: black;
     color: white;
-    font-weight: 900;
+    font-weight: 900;*/
   }
   .tertiary{
   

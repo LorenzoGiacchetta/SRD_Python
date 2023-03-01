@@ -5,7 +5,6 @@
 @using RestSharp
 @inject IDbContextFactory<ApplicationDbContext> DbFactory
 @page "/Principal"
-
 @*<AuthorizeView Roles="Admin">*@
    
     <div class="titulo pat">
@@ -19,8 +18,7 @@
     }
     else if (!string.IsNullOrEmpty(Patente))
     {
-        
-        <div class="patente">
+        <div class="patente" hidden="@ocultarPatente">
             <span>
                 La patente es: 
             </span>
@@ -30,28 +28,33 @@
             <p>
                 ¿La patente es correcta?
             </p>
-            <input type="button" name="" value="" @onclick="SiPagoMetodo"/> Si 
-            <input type="button" name="" value="" class="btn btn-primary" @onclick="Editar" /> No           
+            <div class="inputSiNo">
+                <div>
+                    <input class="SiNo" type="button" name="" value="Si" @onclick="SiPagoMetodo" />
+                </div>
+                <div>
+                    <input type="button" name="" value="No" class="SiNo" @onclick="Editar" />
+                </div>
+            </div>
 
-           
-            @if(Editable == true)
+        </div>
+        <div class="patente">
+            @if (Editable == true)
             {
+                <div>
+                    Inserte la patente manualmente y enviela.
+                </div>
                 <em>
-                    <input class="inputEdit" type="text" style="text-align:center" @bind="Patente" />
+                    <input class="inputEdit" type="text" @bind="Patente" />
                 </em>
-
                 <p class="EnviarPatEditadaEm">
                     <input class="EnviarPatEditada" type="submit" @onclick="SiPagoMetodo" />
                 </p>
             }
-            else if(Patente != "ERROR")
+            @if (SiPago == true)
             {
-                if (SiPago == true)
-                {
-                    <p>tu patente esta @(Pago ? "paga" : "impaga")</p>
-                }
+                <p>Patente @(Pago ? "paga" : "impaga")</p>
             }
-             
         </div>
     }
 
@@ -80,8 +83,9 @@
 @*</AuthorizeView>*@
 @code {
     bool Ocupado { get; set; }
-    bool Pago { get; set; }
+    bool ocultarPatente { get; set; }
     string Patente { get; set; }
+    bool Pago { get; set; }
     string Base64Img { get; set; }
     string Error { get; set; }
     byte[] ImageArray { get; set; }
@@ -92,6 +96,7 @@
 
 
     [Authorize(Roles = "Admin")]
+
     public class AdministrationController : Controller
     {
         public IActionResult Index() =>
@@ -100,6 +105,7 @@
 
     public void Editar()
     {
+        ocultarPatente = true;
         Editable = !Editable;
     }
     public void SiPagoMetodo() 
