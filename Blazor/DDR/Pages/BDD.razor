@@ -53,10 +53,8 @@
     }
     public Patente modelpat = new Patente();
     private Patente[] Bdpatente;
-    private async Task CargarNewPatente()
+    public async Task CargarNewPatente()
     {
-
-
         using var context = DbFactory.CreateDbContext();
 
         var PatenteNew = new Patente
@@ -65,10 +63,6 @@
             };
         context.Patentes.Add(PatenteNew);
         context.SaveChanges();
-
     }
-
-
-
 }
 

@@ -8,8 +8,9 @@
 @*<AuthorizeView Roles="Admin">*@
    
     <div class="titulo pat">
-
-        <h3><span>Estacionamiento medido automatico</span></h3>
+        <h3>
+            <span>Estacionamiento medido automatico</span>
+        </h3>
     </div>
 
     @if (Ocupado)
@@ -46,12 +47,14 @@
                 <div>
                     Inserte la patente manualmente y enviela.
                 </div>
-                <em>
-                    <input class="inputEdit" type="text" @bind="Patente" />
-                </em>
-                <p class="EnviarPatEditadaEm">
-                    <input class="EnviarPatEditada" type="submit" @onclick="SiPagoMetodo" />
-                </p>
+                <form>
+                    <em>
+                        <input class="inputEdit" type="text" @bind-value="Patente" />
+                    </em>
+                    <p class="EnviarPatEditadaEm">
+                        <input class="EnviarPatEditada" type="submit" @onclick="envioPatEditada" />
+                    </p>
+                </form>
             }
             @if (SiPago == true)
             {
@@ -95,7 +98,13 @@
     bool Editable { get; set; }
     string stringBorrar { get; set; }
     bool SiPago { get; set; }
+    string patEditada { get; set; }
 
+    private void envioPatEditada()
+    {
+        Patente = patEditada;
+        SiPagoMetodo();
+    }
 
     [Authorize(Roles = "Admin")]
 
