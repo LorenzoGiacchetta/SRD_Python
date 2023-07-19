@@ -58,14 +58,14 @@ class Reconocimiento:
                     cv2.imshow("placa", placa)
                     cv2.waitKey(0)
                     return placa
-    def lecDigitos(image, textAux = "", psm=7):
+    def lecDigitos(image, psm=7):
         # EXTRAE EL TEXTO Y LO MUESTRA POR CONSOLA
         # NORMALIZACION DE CARACTERES
         alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         options = "-c tessedit_char_whitelist={}".format(alphanumeric)
         options += " --psm {}".format(psm)
-        #gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        #Bimg= cv2.threshold(gray, 170, 255, cv2.THRESH_BINARY_INV)[1]
-        #cv2.imshow('Bimg', Bimg )
-        text = textAux + pytesseract.image_to_string(image, config=options)
-        return print('PLACA: ', text)
+        try:
+            text = pytesseract.image_to_string(image, config=options)
+            return 'PLACA: ', text
+        except Exception:
+            return "Error al intentar reconocer"
