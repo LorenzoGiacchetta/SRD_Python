@@ -12,8 +12,7 @@ python main2.py .\img1\010.png
 python main2.py .\img1\011.png
 python main2.py .\img1\012.png
 python main2.py .\img1\013.png
-python main2.py .\img1\014.png
-python main2.py .\img1\015.png
+python main2.py .\img1\014.pngpython main2.py .\img1\015.png
 python main2.py .\img1\016.png
 python main2.py .\img1\017.png
 python main2.py .\img1\018.png
