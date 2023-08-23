@@ -37,7 +37,7 @@ def obtenerPlacaPost():
     imageFile = request.files['patente'].read()
     npImg = np.frombuffer(imageFile,np.uint8)
     img = cv2.imdecode(npImg, cv2.IMREAD_COLOR)
-    return jsonify(obtenerPlaca(img))
+    return jsonify(reco.obtenerPlaca(img))
 
 
 if __name__ == '__main__':
