@@ -7,6 +7,7 @@ import base64
 from flask import *
 from config import config
 import Reconocimiento
+import base64
 
 # DECLARAMOS RUTA DE PYTESSERACT
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
@@ -34,13 +35,23 @@ reco = Reconocimiento.Reconocimiento
 @app.route('/api/v1/patente/', methods=['POST'])
 def obtenerPlacaPost():
     #test = request.files['patente'].read()
-    imageFile = request.files['patente'].read()
-    npImg = np.frombuffer(imageFile,np.uint8)
-    img = cv2.imdecode(npImg, cv2.IMREAD_COLOR)
-    return jsonify(reco.obtenerPlaca(img))
 
+    print("Nueva exepcion")
+    imageFile = request.get_data()
+    print(imageFile)
+    image_bytes = base64.b64decode(imageFile)
+    npImg = np.frombuffer(image_bytes,np.uint8)
+    img = cv2.imdecode(npImg, cv2.IMREAD_COLOR)
+    print("Img decodificado")
+
+
+    return jsonify(reco.obtenerPlaca(reco,img))
+
+@app.route('/api/v1/fake/', methods=['POST'])
+def obtenerPlacaPostFake():
+    return "nvz087"
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
 
-#obtenerPlaca('test')
+#reco.obtenerPlaca('test')
