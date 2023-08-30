@@ -83,7 +83,9 @@ class Reconocimiento:
         options = "-c tessedit_char_whitelist={}".format(alphanumeric)
         options += " --psm {}".format(psm)
         try:
+
             text = pytesseract.image_to_string(image, config=options)
+
             return text
         except Exception:
             return "Error al intentar reconocer"

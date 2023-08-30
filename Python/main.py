@@ -9,6 +9,7 @@ from config import config
 import Reconocimiento
 import base64
 
+
 # DECLARAMOS RUTA DE PYTESSERACT
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
 
@@ -50,6 +51,7 @@ def obtenerPlacaPost():
 @app.route('/api/v1/fake/', methods=['POST'])
 def obtenerPlacaPostFake():
     return "nvz087"
+
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
