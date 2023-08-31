@@ -7,6 +7,7 @@ import base64
 from flask import *
 from config import config
 import Reconocimiento
+import ValidacionText
 import base64
 
 
@@ -29,7 +30,7 @@ app = create_app(enviroment)
 
 # EJECUTAMOS EL PROGRAMA DE RECONOCIMIENTO
 reco = Reconocimiento.Reconocimiento
-
+vali = ValidacionText.Validacion
 
 
 # CREAMOS UN METODO POST PARA COMUNICARNOS CON BLAZOR(APPWEB)
@@ -52,7 +53,10 @@ def obtenerPlacaPost():
 def obtenerPlacaPostFake():
     return "nvz087"
 
+@app.route('/api/v1/Valicadion/', methods=['GET'])
+def ValidacionPatente():
 
+    return True
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
 

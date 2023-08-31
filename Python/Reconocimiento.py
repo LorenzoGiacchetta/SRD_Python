@@ -5,7 +5,7 @@ from RecorteImg import Recorte
 import base64
 from flask import *
 from config import config
-
+from ValidacionText import Validacion
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
 
 class Reconocimiento:
@@ -82,10 +82,9 @@ class Reconocimiento:
         alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         options = "-c tessedit_char_whitelist={}".format(alphanumeric)
         options += " --psm {}".format(psm)
+        val = Validacion
         try:
-
             text = pytesseract.image_to_string(image, config=options)
-
-            return text
+            return val.LimpiarTextoReco(text)
         except Exception:
             return "Error al intentar reconocer"
