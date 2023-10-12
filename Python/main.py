@@ -37,7 +37,6 @@ vali = ValidacionText.Validacion
 @app.route('/api/v1/patente/', methods=['POST'])
 def obtenerPlacaPost():
     #test = request.files['patente'].read()
-
     print("Nueva exepcion")
     imageFile = request.get_data()
     print(imageFile)
