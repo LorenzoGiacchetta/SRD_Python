@@ -49,9 +49,9 @@ class Recorte:
                             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                            [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-                            [1, 1, 1, 1, 1, 1, 1, 1, 0, 0]])
+                            [0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
+                            [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+                            [0, 1, 1, 1, 1, 1, 1, 1, 1, 0]])
         return MatrizReco4
     #ingresar la matris que queres recortar y el escalado sobre la imagen
     def RecorteRescalado(MatrizReco4,hI,wI):
