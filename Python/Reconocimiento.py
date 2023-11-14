@@ -39,11 +39,6 @@ class Reconocimiento:
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
         closed3= cv2.morphologyEx(binary3, cv2.MORPH_CLOSE, kernel, iterations=4)
 
-        #cv2.imshow("blur2", blur2)
-        #cv2.imshow("binary3", binary3)
-        cv2.imshow("nucleo3", closed3)
-        cv2.imshow("image", image)
-        #cv2.waitKey(0)
 
         return closed3,image
 
@@ -64,10 +59,12 @@ class Reconocimiento:
             #cv2.imshow("roi", placa)
             #cv2.waitKey(0)
             # RECONOCEMOS EL AREA Y LAS ARISTAS DE LA IMAGEN
-            if 2.4 <=   aspect_ratio <= 5.7 :
+            if 2.4 <= aspect_ratio <= 5.7:
                 aux = self.lecDigitos(placa)
                 if val.LimpiarTexto(aux) == True:
                     return aux
+                else:
+                    return ""
     def lecDigitos(image, psm=7,):
         # EXTRAE EL TEXTO Y LO MUESTRA POR CONSOLA
         # NORMALIZACION DE CARACTERES
@@ -75,16 +72,9 @@ class Reconocimiento:
         options = "-c tessedit_char_whitelist={}".format(alphanumeric)
         options += " --psm {}".format(psm)
         grayTexto= cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        BinaryTexto = cv2.threshold(grayTexto, 128, 255, cv2.THRESH_BINARY)[1]
-
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2 ))
+        BinaryTexto = cv2.threshold(grayTexto, 160, 255, cv2.THRESH_BINARY)[1]
+        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 1 ))
         OpenText = cv2.morphologyEx(BinaryTexto, cv2.MORPH_OPEN, kernel, iterations=1)
-
-        #prueba de otra forma
-        #BlurText= cv2.blur(grayTexto, (3, 3))
-        #BinaryTexto = cv2.threshold(BlurText, 150, 255, cv2.THRESH_BINARY)[1]
-
-        cv2.imshow("binari", OpenText)
         val = Validacion
         try:
             text = pytesseract.image_to_string(OpenText, config=options)
