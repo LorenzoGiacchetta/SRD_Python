@@ -1,5 +1,6 @@
 FROM python:3.10
 WORKDIR /app
+EXPOSE 5000
 RUN apt update
 RUN apt install -y libgl1-mesa-glx
 COPY requirements.txt .
