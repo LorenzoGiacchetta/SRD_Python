@@ -6,7 +6,7 @@ import base64
 from flask import *
 from config import config
 from ValidacionText import Validacion
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
+#pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
 
 class Reconocimiento:
     def obtenerPlaca(self, img):

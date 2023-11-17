@@ -5,7 +5,7 @@ import Reconocimiento
 import pytesseract
 import numpy as np
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
+#pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
 reco = Reconocimiento.Reconocimiento
 Input_ImagesPath="C:/Users/estudiante/PycharmProjects/E.M.A-Project/Python/img1"
 
