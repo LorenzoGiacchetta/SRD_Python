@@ -49,6 +49,7 @@ class Reconocimiento:
     def PorcionReconocimiento (self, cnts, image,min_w=10, max_w=1100, min_h=10, max_h=520, ratio=3.6):
         placas = ''
         val = Validacion
+        i = 0
         for c in cnts:
             area = cv2.contourArea(c)
             x, y, w, h = cv2.boundingRect(c)
@@ -59,6 +60,8 @@ class Reconocimiento:
             #cv2.imshow("roi", placa)
             #cv2.waitKey(0)
             # RECONOCEMOS EL AREA Y LAS ARISTAS DE LA IMAGEN
+            cv2.imwrite(f'{i}.jpg', placa)
+            i = i + 1
             if 2.4 <= aspect_ratio <= 5.7:
                 aux = self.lecDigitos(placa)
                 if val.LimpiarTexto(aux) == True:
@@ -76,8 +79,8 @@ class Reconocimiento:
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 1 ))
         OpenText = cv2.morphologyEx(BinaryTexto, cv2.MORPH_OPEN, kernel, iterations=1)
         val = Validacion
-        try:
-            text = pytesseract.image_to_string(OpenText, config=options)
-            return val.LimpiarTextoReco(text)
-        except Exception:
-            return "Error al intentar reconocer"
+        #ACA PINCHA
+        text = pytesseract.image_to_string(OpenText, config=options)
+        #HASTA ACA
+        return val.LimpiarTextoReco(text)
+        
