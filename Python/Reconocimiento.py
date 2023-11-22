@@ -16,7 +16,7 @@ class Reconocimiento:
         (canny,image) = self.PintarImagen(Recorteimg)
         cnts = self.Contornos(canny, Recorteimg)
         cv2.drawContours(gray, cnts, -1, (0, 255, 0), 2)
-        #cv2.waitKey(0)
+
         return self.PorcionReconocimiento(self,cnts, Recorteimg)
 
     def PintarImagen(image, gausP =(3, 3), cannyP = [100, 200], iterations=20):
@@ -24,9 +24,11 @@ class Reconocimiento:
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         gray = cv2.blur(gray, gausP)
         binary = cv2.threshold(gray, 170, 255, cv2.THRESH_BINARY)[1]
+
         #cv2.imshow("binario", binary)
         #cv2.waitKey(0)
         canny = cv2.Canny(binary, cannyP[0], cannyP[1])
+
         kernel=cv2.getStructuringElement(cv2.MORPH_RECT,(10,8))
         closed1 = cv2.morphologyEx(canny,cv2.MORPH_CLOSE,kernel)
         blur = cv2.blur(closed1, (20, 7))
@@ -38,7 +40,6 @@ class Reconocimiento:
         binary3 = cv2.threshold(blur2, 130, 255, cv2.THRESH_BINARY)[1]
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
         closed3= cv2.morphologyEx(binary3, cv2.MORPH_CLOSE, kernel, iterations=4)
-
 
         return closed3,image
 
@@ -78,6 +79,10 @@ class Reconocimiento:
         BinaryTexto = cv2.threshold(grayTexto, 160, 255, cv2.THRESH_BINARY)[1]
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 1 ))
         OpenText = cv2.morphologyEx(BinaryTexto, cv2.MORPH_OPEN, kernel, iterations=1)
+
+        cv2.imshow("imagen", grayTexto)
+        cv2.imshow("recorte", BinaryTexto)
+        cv2.imshow("closed 3", OpenText)
         val = Validacion
         #ACA PINCHA
         text = pytesseract.image_to_string(OpenText, config=options)
