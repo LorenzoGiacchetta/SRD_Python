@@ -34,21 +34,10 @@ vali = ValidacionText.Validacion
 
 
 # CREAMOS UN METODO POST PARA COMUNICARNOS CON BLAZOR(APPWEB)
-@app.route('/api/v1/patente', methods=['POST'])
-def obtenerPlacaPost():
-    app.logger.info("1")
-    imageFile = request.get_data()
-    app.logger.info("2")
-    image_bytes = base64.b64decode(imageFile)
-    app.logger.info("3")
-    npImg = np.frombuffer(image_bytes,np.uint8)
-    app.logger.info("4")
-    img = cv2.imdecode(npImg, cv2.IMREAD_COLOR)
-    app.logger.info("Img decodificado")
-    cv2.imwrite("result.jpg", img) 
-    rv = reco.obtenerPlaca(reco,img)
-    app.logger.info(rv)
-    return jsonify(rv)
+@app.route('/api/v1/Validacion', methods=['POST'])
+def ValidacionPatente():
+    TextoValidar =request.get_data().decode('utf-8')
+    return str(vali.LimpiarTexto(TextoValidar))
 
 @app.route('/api/v1/fake/', methods=['POST'])
 def obtenerPlacaPostFake():
