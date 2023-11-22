@@ -14,5 +14,5 @@ for n in files_names:
     img = cv2.imread(f".\img1\{n}")
     Text = reco.obtenerPlaca(reco ,img)
     print(Text)
-    cv2.waitKey(0)
+    #cv2.waitKey(0)
 

@@ -80,9 +80,9 @@ class Reconocimiento:
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 1 ))
         OpenText = cv2.morphologyEx(BinaryTexto, cv2.MORPH_OPEN, kernel, iterations=1)
 
-        cv2.imshow("imagen", grayTexto)
-        cv2.imshow("recorte", BinaryTexto)
-        cv2.imshow("closed 3", OpenText)
+        #cv2.imshow("imagen", grayTexto)
+        #cv2.imshow("recorte", BinaryTexto)
+        #cv2.imshow("closed 3", OpenText)
         val = Validacion
         #ACA PINCHA
         text = pytesseract.image_to_string(OpenText, config=options)
