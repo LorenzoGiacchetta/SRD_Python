@@ -12,7 +12,7 @@ import base64
 
 
 # DECLARAMOS RUTA DE PYTESSERACT
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
+#pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
 
 # CREAMOS LA API Y SU ENTORNO
 
